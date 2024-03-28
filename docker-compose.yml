@@ -4,11 +4,13 @@ services:
 
   db: 
     image: postgres:16.1-alpine3.19
-    restart: unless-stop
+    restart: always
     env_file:
       - ./env_vars/.postgres_env
     ports:
       - "5432:5432"
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d  
   
   adminer:
     image: adminer
